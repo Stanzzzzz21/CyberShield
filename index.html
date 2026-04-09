@@ -3,240 +3,314 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CyberShield anti-raid</title>
-
+<title>CyberShield | Advanced Discord Security</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Inter:wght@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
-  /* 2. Apply to EVERYTHING */
-  * {
-    font-family: 'Audiowide', cursive;
-    letter-spacing: 1px; /* Audiowide looks better with a tiny bit of space */
+  :root {
+    --primary: #00ffc3;
+    --secondary: #00aaff;
+    --bg-dark: #000000;
+    --card-bg: rgba(255, 255, 255, 0.03);
+    --text-muted: #94a3b8;
   }
 
-  /* 3. OPTIONAL: If the small text is hard to read, 
-     use this rule to keep paragraphs clean: */
-  p, .description {
-    font-family: 'Inter', sans-serif; 
-    letter-spacing: normal;
-    opacity: 0.9;
+  * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+  body {
+    background: radial-gradient(circle at top, #013013, #000000);
+    background-attachment: fixed;
+    color: #eafff7;
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
   }
+
+  h1, h2, h3, .brand-font { font-family: 'Audiowide', cursive; letter-spacing: 1px; }
+
+  /* --- GLOBAL NAVIGATION --- */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 10%;
+    position: sticky;
+    top: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+  }
+  .nav-logo { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+  .nav-logo img { height: 30px; }
+  .nav-logo span { font-family: 'Audiowide', cursive; font-size: 1.2rem; }
+  nav div a { color: var(--text-muted); text-decoration: none; margin-left: 20px; font-size: 0.9rem; transition: 0.3s; font-family: 'Audiowide', cursive;}
+  nav div a:hover { color: var(--primary); }
+
+  /* --- MAIN VIEW: HERO SECTION --- */
+  #main-view { text-align: center; }
   
-  /* Keep your icons centered with the new font */
-  .material-symbols-outlined {
+  .hero { padding: 80px 10% 20px; display: flex; flex-direction: column; align-items: center; }
+  .status-badge {
     display: inline-flex;
-    vertical-align: middle;
+    align-items: center;
+    gap: 8px;
+    background: rgb(112, 6, 6);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    margin-bottom: 30px;
   }
-</style>
+  .dot { height: 8px; width: 8px; background: var(--primary); border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
+  .hero h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1.1; margin-bottom: 25px; }
+  .hero h1 span { color: var(--primary); }
+  .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 800px; line-height: 1.6; margin-bottom: 40px; }
 
-
-<style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Inter, sans-serif;
-}
-
-body {
-  background: radial-gradient(circle at top, #013013, #000000);
-  color: #eafff7;
-}
-
-/* NAV */
-nav {
-  display: flex;
-  justify-content: space-between;
-  padding: 20px 10%;
-}
-
-nav a {
-  color: #94a3b8;
-  text-decoration: none;
-  margin-left: 20px;
-  transition: 0.3s;
-}
-
-nav a:hover {
-  color: #eafff7;
-}
-
-/* HERO */
-.hero {
-  padding: 120px 10%;
-  max-width: 900px;
-}
-
-.hero h1 {
-  font-size: 4rem;
-  line-height: 1.1;
-  letter-spacing: -2px;
-}
-
-.hero h1 span {
-  background: linear-gradient(90deg, #00ffc3, #00aaff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.hero p {
-  margin-top: 20px;
-  color: #94a3b8;
-  font-size: 1.1rem;
-}
-
-.buttons {
-  margin-top: 30px;
-}
-
-.btn {
-  display: inline-block;
-  padding: 12px 20px;
-  margin-right: 10px;
-  border-radius: 10px;
-  text-decoration: none;
-  transition: 0.3s;
-}
-
-.primary {
-  background: #00ffc3;
-  color: #000;
-}
-
-.secondary {
-  border: 1px solid #334155;
-  color: #eafff7;
-}
-
-.btn:hover {
-  transform: translateY(-3px);
-}
-
-/* PROJECTS */
-.projects {
-  padding: 80px 10%;
-}
-
-.projects h2 {
-  font-size: 2rem;
-  margin-bottom: 30px;
-}
-
-.project-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-}
-
-.card {
-  padding: 20px;
-  border-radius: 15px;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.05);
-  transition: 0.3s;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  border-color: rgba(0,255,195,0.4);
-}
-
-.card h3 {
-  margin-bottom: 10px;
-}
-
-.card p {
-  color: #94a3b8;
-  font-size: 0.9rem;
-}
-
-/* FOOTER */
-footer {
-  padding: 40px 10%;
-  color: #64748b;
-}
-
-/* MOBILE */
-@media (max-width: 768px) {
-  .hero h1 {
-    font-size: 2.5rem;
+  /* --- BUTTONS --- */
+  .buttons .btn {
+    display: inline-block;
+    padding: 16px 32px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+    margin: 8px;
+    cursor: pointer;
+    border: none;
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
   }
-}
+  .primary { background: var(--primary); color: #000; }
+  .secondary { border: 1px solid #334155; color: #fff; background: transparent; }
+  .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0, 255, 195, 0.1); }
+
+  /* --- MAIN VIEW: STATS & FEATURES --- */
+  .stats-bar { display: flex; justify-content: center; gap: 60px; padding: 40px 10%; margin-top: 20px; }
+  .stat-item h4 { font-size: 2.5rem; color: var(--primary); }
+  .stat-item p { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; margin-top: 5px; }
+
+  .projects { padding: 40px 10% 80px; }
+  .section-title { margin-bottom: 40px; font-size: 2rem; }
+  .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+  .card {
+    padding: 30px;
+    background: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    text-align: center;
+    transition: 0.3s;
+  }
+  .card:hover { border-color: var(--primary); transform: translateY(-5px); }
+  .card h3 { color: var(--primary); margin-bottom: 15px; font-size: 1.2rem; }
+  .card p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; }
+
+  /* --- LEGAL VIEW --- */
+  #legal-view { display: none; }
+  
+  /* Legal Top Bar */
+  .legal-top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 10%;
+    background: rgba(0, 0, 0, 0.95);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  .legal-top-bar .btn.secondary { padding: 8px 16px; margin: 0; font-size: 0.9rem; }
+  
+  /* Legal Content */
+  .legal-content { padding: 10px 1%; max-width: 1000px; margin: 0 auto; line-height: 1.8; }
+  .legal-content h1 { color: #fff; font-size: 2.5rem; margin-bottom: 5px; }
+  .legal-content .last-updated { color: var(--primary); font-size: 0.9rem; margin-bottom: 40px; text-transform: uppercase; letter-spacing: 1px; }
+  .legal-content h2 { color: var(--primary); margin: 40px 0 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
+  .legal-content h3 { color: #fff; margin: 25px 0 10px; font-family: 'Inter', sans-serif; font-weight: 600; }
+  .legal-content p { color: var(--text-muted); margin-bottom: 15px; }
+  .legal-content ul { color: var(--text-muted); margin-left: 20px; margin-bottom: 20px; }
+  .legal-content li { margin-bottom: 8px; }
+
+  footer { padding: 40px 10%; color: #64748b; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; }
 </style>
 </head>
 
 <body>
 
+<div id="main-view">
+  <nav>
+    <div class="nav-logo" onclick="location.reload()">
+      <img src="https://image2url.com/r2/default/images/1775734016240-80cf9a9d-8530-44b7-98fd-5b29b4b5333f.png" alt="Logo"> 
+      <span>CyberShield</span>
+    </div>
+    <div>
+      <a href="#features">Features</a>
+      <a href="#main-view">Home</a>
+      <
+    </div>
+  </nav>
 
+  <section class="hero">
+    <div class="status-badge"><span class="dot"></span> Bot Status Unavalible.</div>
+    
+    <h1>Meet <span>CyberShield</span><br>Your Ultimate Discord Anti-Raid</h1>
+    
+    <p>
+      The next generation of Discord security. CyberShield uses heuristic patterns to stop raids before they start. Built for communities that value safety, speed, and 99.9% uptime.
+    </p>
+    
+    <div class="buttons">
+      <a href="https://discord.com/oauth2/authorize?client_id=1491381996025413764&permissions=8&integration_type=0&scope=bot" class="btn primary">
+        Invite CyberShield
+    </button>
+</a>
+      <button class="btn secondary" onclick="toggleView(true)">Privacy Policy & Terms of Conditions</button>
+    </div>
+    
+    <small style="color: #64748b; margin-top: 30px; display: block;"><i>Version v2.4.0 (Live)</i></small>
+  </section>
 
-<section class="hero">
-  <h1>
-   Meet <span>CyberShield</span>
-    Your Ultimate Discord Anti-Raid
-  </h1>
-  <small> <i>Please note that this bot is still in development and may contain bugs.</i></small>
-  <p>
-CyberShield is a powerful Discord bot designed to protect your server from raids and malicious attacks. With advanced features and real-time monitoring, CyberShield keeps your community safe and secure.
-  </p>
-
-
-  <div class="buttons">
-    <a href="#" class="btn primary">Invite CyberShield</a>
-    <a href="#" class="btn secondary">Privacy Policy</a>
-  </div>
-</section>
-
-<section class="projects">
-  <h2>Some features:</h2>
-
+<section class="projects" id="features">
+  <div class="why-us?" id="why-us">
+    <h2 class="section-title">Why Choose CyberShield?</h2>
   <div class="project-grid">
+      <div class="card">
+        <h3>99.99% Uptime</h3>
+        <p>Humans require rest, while raiders do not. The system is constantly on duty, working continuously through every minute of every hour. CyberShield acts in milliseconds, faster than anyone can possibly press “ban” on a keyboard.</p>
+      </div>
 
-    <div class="card">
-      <h3>Anti-Nuke</h3>
-      <p>Neutralizes rogue staff and compromised accounts by instantly stripping permissions if they attempt to mass-delete channels or roles.</p>
-    </div>
-    
-
-    <div class="card">
-      <h3>Invite Shield </h3>  
-      <p>Automatically purges unauthorized Discord invite links to prevent member poaching while allowing staff to share official connections.</p>
-    </div>
-
-    <div class="card">
-      <h3>Anti-Spam</h3>
-      <p>Instantly neutralizes rapid-fire messaging, repetitive content, and phishing links with automated timeouts to keep your conversation clean.</p>
-
-    </div>
-    
-    <div class="card">
-      <h3>Auto-Quarantine</h3>
-      <p>Automatically isolates suspicious new accounts in a locked "holding" channel until they pass a manual or automated security verification.</p>
-    </div>
-
-    <div class="card">
-      <h3>Webhook Guard</h3>
-      <p>Monitors and instantly deletes unauthorized webhooks, preventing "ghost pings" and hidden backdoors used by advanced raiders.</p>
-    </div>
-
-
+            <div class="card">
+        <h3>Fassssst speeds!</h3>
+        <p>The majority of bots are designed to be generalists; they level, play music, play games, and even moderate. Bots such as these are slow and hard to understand. However, CyberShield focuses solely on security. Our bot will be fast and efficient.</p>
+      </div>
   </div>
 </section>
 
-
-
-<footer>
+  <section class="projects" id="features">
+    <h2 class="section-title">Security Modules</h2>
+    <div class="project-grid">
+      <div class="card">
+        <h3>Anti-Nuke</h3>
+        <p>Neutralizes rogue staff and compromised accounts by instantly stripping permissions if they attempt to mass-delete channels or roles.</p>
+      </div>
+      <div class="card">
+        <h3>Invite Shield</h3>
+        <p>Automatically purges unauthorized Discord invite links to prevent member poaching while allowing staff to share official connections.</p>
+      </div>
+      <div class="card">
+        <h3>Anti-Spam</h3>
+        <p>Instantly neutralizes rapid-fire messaging, repetitive content, and phishing links with automated timeouts to keep your conversation clean.</p>
+      </div>
+      <div class="card">
+        <h3>Auto-Quarantine</h3>
+        <p>Automatically isolates suspicious new accounts in a locked "holding" channel until they pass a manual or automated security verification.</p>
+      </div>
+      <div class="card">
+        <h3>Webhook Guard</h3>
+        <p>Monitors and instantly deletes unauthorized webhooks, preventing "ghost pings" and hidden backdoors used by advanced raiders.</p>
+      </div>
+    </div>
+  </section>
+  
   <footer>
-  <p>&copy; 2026 CyberShield, all rights reserved. CyberShield is not affiliated with Discord Inc. All trademarks belong to their respective owners.</p>
-</footer>
-</footer>
+    <p>&copy; 2026 CyberShield. Not affiliated with Discord Inc.</p>
+  </footer>
+</div>
 
+<div id="legal-view">
+  <div class="legal-top-bar">
+    <div class="nav-logo" onclick="toggleView(false)">
+      <img src="https://image2url.com/r2/default/images/1775734016240-80cf9a9d-8530-44b7-98fd-5b29b4b5333f.png" alt="Logo"> 
+      <span>CyberShield</span> <small><i><- Click me to go back</i></small>
+    </div>
+    
+    
+  </div>
 
+  <div class="legal-content">
+    <h1>Privacy Policy & Terms of Service</h1>
+    <div class="last-updated">Last Updated: April 9, 2026</div>
 
+    <h2>PART 1: PRIVACY POLICY</h2>
+    
+    <h3>1. Introduction</h3>
+    <p>CyberShield ("the Bot") is a security-focused service designed to protect Discord communities. This policy outlines how we handle data to ensure your server remains secure.</p>
+    
+    <h3>2. Data Collection</h3>
+    <p>To provide anti-raid and server protection, the Bot processes the following:</p>
+    <ul>
+      <li><strong>Unique Identifiers:</strong> User IDs and Server IDs to manage permissions and moderation.</li>
+      <li><strong>Action Logs:</strong> Discord Audit Logs to monitor mass-deletion of channels or roles (Anti-Nuke).</li>
+      <li><strong>Invite Data:</strong> Metadata from invite links to prevent unauthorized poaching (Invite Shield).</li>
+      <li><strong>Real-time Traffic:</strong> Message frequency and content patterns to detect rapid-fire messaging (Anti-Spam).</li>
+    </ul>
 
+    <h3>3. Data Usage & Sharing</h3>
+    <ul>
+      <li><strong>No Selling:</strong> We never sell, trade, or share your data with third parties.</li>
+      <li><strong>No Monitoring:</strong> We do not read or store private conversations for personal use.</li>
+      <li><strong>Purpose:</strong> Data is used exclusively for automated security actions (kicks, bans, timeouts).</li>
+    </ul>
+
+    <h3>4. Data Retention & Deletion</h3>
+    <ul>
+      <li><strong>Retention:</strong> Security logs and moderation data are automatically deleted after 30 days.</li>
+      <li><strong>Removal:</strong> If the Bot is removed from a server, all configurations for that guild are wiped from our database.</li>
+      <li><strong>Requests:</strong> Users may contact the developers to request a manual data deletion.</li>
+    </ul>
+
+    <h2>PART 2: TERMS AND CONDITIONS</h2>
+    
+    <h3>1. Agreement to Terms</h3>
+    <p>By adding CyberShield to your server, you and your staff agree to follow these terms and the Discord Community Guidelines.</p>
+    
+    <h3>2. Proper Usage</h3>
+    <ul>
+      <li>You may not use the Bot to harass users or automate illegal activities.</li>
+      <li>Attempting to bypass the Bot's security features or 'stress test' our hosting is prohibited.</li>
+      <li>Exploiting bugs in the Bot's code will result in a permanent blacklist from our services.</li>
+    </ul>
+
+    <h3>3. Limitation of Liability</h3>
+    <p>CyberShield is provided on an 'as is' basis. While we strive for maximum protection, the developers are not responsible for server damages, raids, or losses resulting from bot downtime, hosting issues, or user misconfiguration.</p>
+    
+    <h3>4. Service Disruptions</h3>
+    <p>We do not guarantee 100% uptime. Service may be interrupted for maintenance, updates, or hosting provider issues.</p>
+
+    <h3>5. Right to Service</h3>
+    <p>The development team reserves the right to terminate service to any user or server found violating these terms or using the Bot for malicious purposes.</p>
+
+    <h2>PART 3: CONTACT & SUPPORT</h2>
+    <p>For support, data inquiries, or bug reports, please contact us via our official channels or our support server.</p>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 CyberShield. Not affiliated with Discord Inc.</p>
+  </footer>
+</div>
+
+<script>
+  function toggleView(showLegal) {
+    const mainView = document.getElementById('main-view');
+    const legalView = document.getElementById('legal-view');
+    
+    if (showLegal) {
+      mainView.style.display = 'none';
+      legalView.style.display = 'block';
+    } else {
+      mainView.style.display = 'block';
+      legalView.style.display = 'none';
+    }
+    // Instantly jump to the top of the page when views change
+    window.scrollTo(0, 0);
+  }
+</script>
 
 </body>
 </html>
