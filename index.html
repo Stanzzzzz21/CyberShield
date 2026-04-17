@@ -164,7 +164,20 @@
   </nav>
 
   <section class="hero">
-    <div class="status-badge"><span class="dot"></span> Bot Status Unavalible.</div>
+    <div class="status-badge"; async function updateStatus() {
+    try {
+        const res = await fetch("https://discord.com/api/v10/users/1491381996025413764", {
+            headers: { "Authorization": `Bot ${process.env.BOT_TOKEN}` }
+        });
+    } catch {
+        document.getElementById("bot-status").innerText = "🔴 Offline";
+        return;
+    }
+
+    document.getElementById("bot-status").innerText = "🟢 Online";
+}
+><span class="dot"></span> Bot Status Unavalible.</div>
+    
     
     <h1>Meet <span>CyberShield</span><br>Your Ultimate Discord Anti-Raid</h1>
     
